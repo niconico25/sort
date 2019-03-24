@@ -20,6 +20,7 @@ from merge_difficult import merge_sort_difficult_
 from quick import quick_sort_
 from quick_difficult import quick_sort_difficult_
 from heap import heap_sort_
+from heap_difficult import heap_sort_difficult_
 
 
 def main():
@@ -30,6 +31,7 @@ def main():
     test(quick_sort_)
     test(quick_sort_difficult_)
     test(heap_sort_)
+    test(heap_sort_difficult_)
 
     # incorrect_sort は
     # shuffle してるのでエラーになる。

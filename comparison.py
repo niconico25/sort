@@ -16,6 +16,7 @@ from merge_difficult import merge_sort_difficult_
 from quick import quick_sort_
 from quick_difficult import quick_sort_difficult_
 from heap import heap_sort_
+from heap_difficult import heap_sort_difficult_
 
 
 def comparison():
@@ -27,6 +28,7 @@ def comparison():
         quick_sort_,
         quick_sort_difficult_,
         heap_sort_,
+        heap_sort_difficult_,
     ]
     funcscale.argument_list = [
         (([random.randint(0, 10**i) for _ in range(10**i)], ), {})
