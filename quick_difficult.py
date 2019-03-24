@@ -5,21 +5,21 @@ def quick_sort_difficult(lst):
     tmp_lst = [None] * len(lst)  # <- ポイント
     begin = 0
     end = len(lst) - 1
-    _quick_sort(lst, tmp_lst, begin, end)
+    _quick_sort_difficult(lst, tmp_lst, begin, end)
 
 
-def _quick_sort(lst, tmp_lst, begin, end):
+def _quick_sort_difficult(lst, tmp_lst, begin, end):
     if begin >= end:
         return
-    
+
     for i in range(begin, end + 1):
         tmp_lst[i] = lst[i]
-    
+
     index = begin - 1
     left = begin - 1
     right = end + 1
     pivod = lst[end]
-    
+
     # except `end`, because `end` is pivot
     while index < end - 1:
         index = index + 1
@@ -29,7 +29,13 @@ def _quick_sort(lst, tmp_lst, begin, end):
         else:
             right = right - 1
             lst[right] = tmp_lst[index]
-    
-    _quick_sort(lst, tmp_lst, begin, left)
+
+    _quick_sort_difficult(lst, tmp_lst, begin, left)
     lst[left + 1] = pivod
-    _quick_sort(lst, tmp_lst, right, end)
+    _quick_sort_difficult(lst, tmp_lst, right, end)
+
+
+def quick_sort_difficult_(lst):
+    new_lst = lst.copy()
+    quick_sort_difficult(new_lst)
+    return new_lst
