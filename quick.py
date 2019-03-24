@@ -8,7 +8,16 @@ def quick_sort_(lst):
     if not lst:
         return []
 
-    center = lst.pop()
-    left_list = quick_sort_([e for e in lst if e <= center])
-    right_list = quick_sort_([e for e in lst if center < e])
-    return left_list + [center] + right_list
+    pivot = lst.pop()
+    smaller = []
+    bigger = []
+    while lst:
+        e = lst.pop()
+        if e <= pivot:
+            smaller.append(e)
+        else:
+            bigger.append(e)
+
+    sorted_smaller = quick_sort_(smaller)
+    sorted_bigger = quick_sort_(bigger)
+    return sorted_smaller + [pivot] + sorted_bigger
