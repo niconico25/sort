@@ -5,8 +5,8 @@ def merge_sort(lst):
 
 
 def merge_sort_(lst):
-    if lst:
-        return []
+    if len(lst) == 1:
+        return [lst.pop()]
 
     #
     # 1. 分割
@@ -28,11 +28,13 @@ def merge_sort_(lst):
             sorted_lst.append(sorted_left.pop())
         else:
             sorted_lst.append(sorted_right.pop())
-
     while sorted_left:
         sorted_lst.append(sorted_left.pop())
-
     while sorted_right:
         sorted_lst.append(sorted_right.pop())
-
     return sorted_lst
+
+
+if __name__ == '__main__':
+    import display  # noqa
+    display.show_sample(merge_sort, 8)

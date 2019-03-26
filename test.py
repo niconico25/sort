@@ -5,7 +5,7 @@
     正しくソートできるかを 100 回確認させています。
 
 実行
-    $ python test.py
+    $ python -O test.py
     Test was succeeded
     $
 
@@ -87,5 +87,15 @@ def suppress_print():
         sys.stdout = stdout
 
 
-if __name__ == '__main__':
+if __debug__:
+    raise Exception('\n'.join((
+        '-O is required.',
+        '',
+        '',
+        '$ python3 -O test.py'
+        '',
+        '',
+        '',
+    )))
+else:
     main()

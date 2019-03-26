@@ -2,8 +2,12 @@ def heap_sort(lst):
     heap = []
     while lst:
         heappush(heap, lst.pop())
+        if __debug__:
+            print_progress(lst, heap)
     while heap:
         lst.append(heappop(heap))
+        if __debug__:
+            print_progress(lst, heap)
 
 
 def heap_sort_(lst):
@@ -16,8 +20,8 @@ def heap_sort_(lst):
 # heapq.py
 # https://github.com/python/cpython/blob/3.7/Lib/heapq.py
 #
-#   そのまま from heapq import heappop してしまうと
-#   C 言語実装の heapop が import されて鬼のように速くなるので
+#   そのまま from heapq import ... してしまうと
+#   C 言語実装の heapq が import されて鬼のように速くなるので
 #   heapq.py からコピペ
 #
 def heappush(heap, item):
@@ -74,3 +78,26 @@ def _siftup(heap, pos):
     # to its final resting place (by sifting its parents down).
     heap[pos] = newitem
     _siftdown(heap, startpos, pos)
+
+
+if __debug__:
+    try:
+        from tree.tree.binary_heap import BinaryHeap
+    except ModuleNotFoundError as err:
+        url = 'https://github.com/niconico25/tree'
+        print('%s: %s' % (err.__class__.__name__, str(err)))
+        print('Please download...')
+        print('$ git clone', url)
+        import sys
+        sys.exit()
+
+
+    def print_progress(lst, heap):
+        print(lst)
+        print(BinaryHeap(heap))
+        print()
+
+
+if __name__ == '__main__':
+    import display  # noqa
+    display.show_sample(heap_sort, 7)

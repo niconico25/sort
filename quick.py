@@ -19,7 +19,7 @@ def quick_sort_(lst):
             smaller.append(e)
         else:
             bigger.append(e)
-
+    
     #
     # 2. 統合
     #
@@ -28,3 +28,8 @@ def quick_sort_(lst):
     sorted_lst = sorted_smaller + [pivot] + sorted_bigger
 
     return sorted_lst
+
+
+if __name__ == '__main__':
+    import display  # noqa
+    display.show_sample(quick_sort, 8)

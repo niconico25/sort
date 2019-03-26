@@ -1,7 +1,7 @@
 def quick_sort_difficult(lst):
     # ポイント
     #   クイックソートは速いけど
-    #   len(lst) 個のメモリ memory を必要とします。
+    #   len(lst) 個分のメモリ memory を必要とします。
     memory = [None] * len(lst)  # <--- ポイント
     begin = 0
     end = len(lst) - 1
@@ -25,9 +25,13 @@ def _quick_sort_difficult(lst, memory, begin, end):
             lst[right] = memory[index]
             right = right - 1
         index = index + 1
+    lst[left] = pivod
+
+    if __debug__:
+        pivot_index = left
+        display.print_progress(progress, lst, begin, pivot_index, end)
 
     _quick_sort_difficult(lst, memory, begin, left - 1)
-    lst[left] = pivod
     _quick_sort_difficult(lst, memory, right + 1, end)
 
 
@@ -35,3 +39,22 @@ def quick_sort_difficult_(lst):
     new_lst = lst.copy()
     quick_sort_difficult(new_lst)
     return new_lst
+
+
+if __debug__:
+    import display
+
+    def progress(lst, begin, pivot_index, end):
+        n = len(lst)
+        progress = []
+        progress = progress + ['  '] * begin
+        progress = progress + ['<<'] * (pivot_index - begin)
+        progress = progress + ['pv']
+        progress = progress + ['>>'] * (end - pivot_index)
+        progress = progress + ['  '] * (n - end - 1)
+        return progress
+
+
+if __name__ == '__main__':
+    import display  # noqa
+    display.show_sample(quick_sort_difficult, 16)

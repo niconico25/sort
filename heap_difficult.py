@@ -1,27 +1,28 @@
 def heap_sort_difficult(lst):
-    # 1) ヒープ heap を作成
+    # ポイント
+    #   ヒープソートは、マージソートやクイックソートのように
+    #   len(lst) 個分のメモリ memory を必要としません。
+
+    # 1) リストをヒープにする。
     heapify(lst)
-    heap = lst
 
-    # 2) 先頭を取り出し末尾と取り替え
-    bottom = len(heap) - 1
-    while bottom:
-        heap[0], heap[bottom] = heap[bottom], heap[0]
-        _siftup(heap, 0, bottom)
-        bottom = bottom - 1
-    heap.reverse()
+    # 2) ヒープの先頭を取り出し、リストの末尾に付け足す。
+    index = len(lst) - 1
+    while index:
+        lst[0], lst[index] = lst[index], lst[0]
+        _siftup(lst, 0, index)
+        index = index - 1
 
-
-def heap_sort_difficult_(lst):
-    new_lst = lst.copy()
-    heap_sort_difficult(new_lst)
-    return new_lst
+    # 3) 逆さまなので反転させる。
+    lst.reverse()
 
 
 #
 # heapq.py
-#   そのまま from heapq import heappop してしまうと
-#   C 言語実装の heapop が import されて鬼のように速くなるので
+# https://github.com/python/cpython/blob/3.7/Lib/heapq.py
+#
+#   そのまま from heapq import ... してしまうと
+#   C 言語実装の heapq が import されて鬼のように速くなるので
 #   heapq.py からコピペ
 #
 def _siftdown(heap, startpos, pos):
@@ -70,3 +71,9 @@ def heapify(x):
     n = len(x)
     for i in reversed(range(n // 2)):
         _siftup(x, i, n)
+
+
+def heap_sort_difficult_(lst):
+    new_lst = lst.copy()
+    heap_sort_difficult(new_lst)
+    return new_lst
