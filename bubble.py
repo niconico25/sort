@@ -8,12 +8,6 @@ def bubble_sort(lst):
                 lst[j], lst[j + 1] = lst[j + 1], lst[j]
 
 
-def bubble_sort_(lst):
-    new_lst = lst.copy()
-    bubble_sort(new_lst)
-    return new_lst
-
-
 if __debug__:
     import display
 
@@ -38,4 +32,4 @@ if __debug__:
 
 if __name__ == '__main__':
     import display  # noqa
-    display.show_sample(bubble_sort, 8)
+    display.show_sample(bubble_sort, 5)

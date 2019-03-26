@@ -12,3 +12,15 @@ def print_progress(progress, lst, *args):
     print(str.join(' ', (f'{e:2d}' for e in lst)))
     print(str.join(' ', progress(lst, *args)))
     print()
+
+
+def no_side_effect(sort):
+    def sorted_(lst):
+        new_lst = lst.copy()
+        sort(new_lst)
+        return new_lst
+
+    # comparison.py で使う
+    # funcscale.py が関数名を読み込むため
+    sorted_.__name__ = sort.__name__
+    return sorted_

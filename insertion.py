@@ -10,12 +10,6 @@ def insertion_sort(lst):
                 break  # <- この break 文がポイント
 
 
-def insertion_sort_(lst):
-    new_lst = lst.copy()
-    insertion_sort(new_lst)
-    return new_lst
-
-
 if __debug__:
     import display
 

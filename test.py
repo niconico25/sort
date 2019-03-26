@@ -12,26 +12,38 @@
 関連
 * [Python の assert 文でテストする](https://python.ms/sub/misc/assert/)
 """
-from contextlib import contextmanager
-from bubble import bubble_sort_
-from insertion import insertion_sort_
-from merge import merge_sort_
-from merge_difficult import merge_sort_difficult_
-from quick import quick_sort_
-from quick_difficult import quick_sort_difficult_
-from heap import heap_sort_
-from heap_difficult import heap_sort_difficult_
+if __debug__:
+    raise Exception('\n'.join((
+        '-O is required.',
+        '',
+        '',
+        '$ python3 -O test.py'
+        '',
+        '',
+        '',
+    )))
+else:
+    from contextlib import contextmanager
+    from bubble import bubble_sort
+    from insertion import insertion_sort
+    from quick import quick_sort
+    from merge import merge_sort
+    from heap import heap_sort
+    from linked_quick import linked_quick_sort
+    from linked_merge import linked_merge_sort
+    from linked_heap import linked_heap_sort
+    from display import no_side_effect
 
 
 def main():
-    test(bubble_sort_)
-    test(insertion_sort_)
-    test(merge_sort_)
-    test(merge_sort_difficult_)
-    test(quick_sort_)
-    test(quick_sort_difficult_)
-    test(heap_sort_)
-    test(heap_sort_difficult_)
+    test(no_side_effect(bubble_sort))
+    test(no_side_effect(insertion_sort))
+    test(no_side_effect(merge_sort))
+    test(no_side_effect(quick_sort))
+    test(no_side_effect(heap_sort))
+    test(no_side_effect(linked_quick_sort))
+    test(no_side_effect(linked_merge_sort))
+    test(no_side_effect(linked_heap_sort))
 
     # incorrect_sort は
     # shuffle してるのでエラーになる。
@@ -87,15 +99,4 @@ def suppress_print():
         sys.stdout = stdout
 
 
-if __debug__:
-    raise Exception('\n'.join((
-        '-O is required.',
-        '',
-        '',
-        '$ python3 -O test.py'
-        '',
-        '',
-        '',
-    )))
-else:
-    main()
+main()

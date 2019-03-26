@@ -1,35 +1,54 @@
 def quick_sort(lst):
-    sorted_lst = quick_sort_(lst)
-    lst.clear()
-    lst.extend(sorted_lst)
+    # ポイント
+    #   クイックソートは速いけど
+    #   len(lst) 個分のメモリ memory を必要とします。
+    memory = [None] * len(lst)  # <--- ポイント
+    begin = 0
+    end = len(lst) - 1
+    _quick_sort(lst, memory, begin, end)
 
 
-def quick_sort_(lst):
-    if not lst:
-        return []
-    #
-    # 1. 分割
-    #
-    pivot = lst.pop()
-    smaller = []
-    bigger = []
-    while lst:
-        e = lst.pop()
-        if e <= pivot:
-            smaller.append(e)
+def _quick_sort(lst, memory, begin, end):
+    if begin == end + 1:
+        return
+
+    for i in range(begin, end + 1):
+        memory[i] = lst[i]
+
+    left, index, right = begin, begin, end
+    pivod = memory[end]
+    while index < end:
+        if memory[index] < pivod:
+            lst[left] = memory[index]
+            left = left + 1
         else:
-            bigger.append(e)
-    
-    #
-    # 2. 統合
-    #
-    sorted_smaller = quick_sort_(smaller)
-    sorted_bigger = quick_sort_(bigger)
-    sorted_lst = sorted_smaller + [pivot] + sorted_bigger
+            lst[right] = memory[index]
+            right = right - 1
+        index = index + 1
+    lst[left] = pivod
 
-    return sorted_lst
+    if __debug__:
+        pivot_index = left
+        display.print_progress(progress, lst, begin, pivot_index, end)
+
+    _quick_sort(lst, memory, begin, left - 1)
+    _quick_sort(lst, memory, right + 1, end)
+
+
+if __debug__:
+    import display
+
+    def progress(lst, begin, pivot_index, end):
+        n = len(lst)
+        progress = []
+        progress = progress + ['  '] * begin
+        progress = progress + ['<<'] * (pivot_index - begin)
+        progress = progress + ['pv']
+        progress = progress + ['>>'] * (end - pivot_index)
+        progress = progress + ['  '] * (n - end - 1)
+        return progress
 
 
 if __name__ == '__main__':
     import display  # noqa
-    display.show_sample(quick_sort, 8)
+    display.show_sample(quick_sort, 16)
