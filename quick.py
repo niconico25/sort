@@ -12,9 +12,15 @@ def _quick_sort(lst, memory, begin, end):
     if begin == end + 1:
         return
 
+    #
+    # 1. コピー
+    #
     for i in range(begin, end + 1):
         memory[i] = lst[i]
 
+    #
+    # 2. 分割
+    #
     left, index, right = begin, begin, end
     pivod = memory[end]
     while index < end:
@@ -31,6 +37,9 @@ def _quick_sort(lst, memory, begin, end):
         pivot_index = left
         display.print_progress(progress, lst, begin, pivot_index, end)
 
+    #
+    # 3. ソート
+    #
     _quick_sort(lst, memory, begin, left - 1)
     _quick_sort(lst, memory, right + 1, end)
 
