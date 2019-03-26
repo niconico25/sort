@@ -5,9 +5,8 @@ def merge_sort(lst):
 
 
 def merge_sort_(lst):
-    n = len(lst)
-    if n == 1:
-        return lst.copy()
+    if lst:
+        return []
 
     #
     # 1. 分割
