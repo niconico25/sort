@@ -23,9 +23,13 @@ def linked_quick_sort(lst):
     #
     # 3. 結合
     #
-    lst.extend(smaller)
-    lst.extend([pivot])
-    lst.extend(bigger)
+    smaller.reverse()
+    while smaller:
+        lst.append(smaller.pop())
+    lst.append(pivot)
+    bigger.reverse()
+    while bigger:
+        lst.append(bigger.pop())
 
 
 if __name__ == '__main__':
