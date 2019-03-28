@@ -1,47 +1,39 @@
 def quick_sort(lst):
-    # ポイント
-    #   クイックソートは速いけど
-    #   len(lst) 個分のメモリ memory を必要とします。
-    memory = [None] * len(lst)  # <--- ポイント
-    begin = 0
-    end = len(lst) - 1
-    _quick_sort(lst, memory, begin, end)
+    _quick_sort(lst, 0, len(lst) - 1)
 
 
-def _quick_sort(lst, memory, begin, end):
+def _quick_sort(lst, begin, end):
     if begin == end + 1:
         return
 
     #
-    # 1. コピー
+    # 1. 分割
     #
-    for i in range(begin, end + 1):
-        memory[i] = lst[i]
-
-    #
-    # 2. 分割
-    #
-    left, index, right = begin, begin, end
-    pivod = memory[end]
-    while index < end:
-        if memory[index] < pivod:
-            lst[left] = memory[index]
+    left, right = begin, end - 1
+    pivot = lst[end]
+    while True:
+        while lst[left] < pivot:
             left = left + 1
-        else:
-            lst[right] = memory[index]
+        while pivot < lst[right]:
             right = right - 1
-        index = index + 1
-    lst[left] = pivod
+        if right <= left:
+            break
+        lst[left], lst[right] = lst[right], lst[left]
+        left = left + 1
+        right = right - 1
+
+    # right = right if 0 <= right else left
+    lst[left], lst[end] = lst[end], lst[left]
+    pivot_index = left
 
     if __debug__:
-        pivot_index = left
         display.print_progress(progress, lst, begin, pivot_index, end)
 
     #
-    # 3. ソート
+    # 2. ソート
     #
-    _quick_sort(lst, memory, begin, left - 1)
-    _quick_sort(lst, memory, right + 1, end)
+    _quick_sort(lst, begin, pivot_index - 1)
+    _quick_sort(lst, pivot_index + 1, end)
 
 
 if __debug__:
