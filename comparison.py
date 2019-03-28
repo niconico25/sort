@@ -48,12 +48,12 @@ def comparison():
     funcscale.function_list = [
         bubble_sort,
         insertion_sort,
-        quick_sort,
-        linked_quick_sort,
         merge_sort,
-        linked_merge_sort,
         heap_sort,
+        quick_sort,
+        linked_merge_sort,
         linked_heap_sort,
+        linked_quick_sort,
     ]
     funcscale.argument_list = [
         (([random.randint(0, 10**i) for _ in range(10**i)], ), {})

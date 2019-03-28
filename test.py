@@ -64,6 +64,7 @@ def test(sort):
     for _ in range(100):
         lst = [randint(0, 99) for _ in range(100)]
         new_lst = sort(lst)
+        print(new_lst)
         assert is_sorted(new_lst), f'{sort.__name__} is incorrect.'
 
 

@@ -9,8 +9,15 @@ def _quick_sort(lst, begin, end):
     #
     # 1. 分割
     #
-    left, right = begin, end - 1
+    left, right = begin, end
     pivot = lst[end]
+
+    # **大事**
+    #   pivot を番兵にしている
+    #   これがないと right が begin を突き抜けて
+    #   リストを一周してしまう
+    lst[left], lst[right] = lst[right], lst[left]
+
     while True:
         while lst[left] < pivot:
             left = left + 1
@@ -22,18 +29,14 @@ def _quick_sort(lst, begin, end):
         left = left + 1
         right = right - 1
 
-    # right = right if 0 <= right else left
-    lst[left], lst[end] = lst[end], lst[left]
-    pivot_index = left
-
     if __debug__:
-        display.print_progress(progress, lst, begin, pivot_index, end)
+        display.print_progress(progress, lst, begin, left, end)
 
     #
     # 2. ソート
     #
-    _quick_sort(lst, begin, pivot_index - 1)
-    _quick_sort(lst, pivot_index + 1, end)
+    _quick_sort(lst, begin, left - 1)
+    _quick_sort(lst, right + 1, end)
 
 
 if __debug__:
